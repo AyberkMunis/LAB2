@@ -8,10 +8,18 @@ package hydraulic;
  */
 public class Source extends Element {
 
-	
+	/**
+	 * constructor
+	 * @param name name of the source element
+	 */
 	public Source(String name) {
 	}
 
+	/**
+	 * Define the flow of the source to be used during the simulation
+	 *
+	 * @param flow flow of the source (in cubic meters per hour)
+	 */
 	public void setFlow(double flow){
 	}
 

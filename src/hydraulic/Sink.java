@@ -8,7 +8,7 @@ public class Sink extends Element {
 
 	/**
 	 * Constructor
-	 * @param name
+	 * @param name name of the sink element
 	 */
 	public Sink(String name) {
 	}

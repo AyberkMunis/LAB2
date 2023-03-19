@@ -10,7 +10,7 @@ public class HSystem {
 // R1
 	/**
 	 * Adds a new element to the system
-	 * @param elem
+	 * @param elem the new element to be added to the system
 	 */
 	public void addElement(Element elem){
 	}

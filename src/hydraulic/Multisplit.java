@@ -11,7 +11,8 @@ public class Multisplit extends Split {
 
 	/**
 	 * Constructor
-	 * @param name
+	 * @param name the name of the multi-split element
+	 * @param numOutput the number of outputs
 	 */
 	public Multisplit(String name, int numOutput) {
 		super(name);

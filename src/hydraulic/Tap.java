@@ -9,9 +9,18 @@ package hydraulic;
 
 public class Tap extends Element {
 
+	/**
+	 * Constructor
+	 * @param name name of the tap element
+	 */
 	public Tap(String name) {
 	}
-	
+
+	/**
+	 * Set whether the tap is open or not. The status is used during the simulation.
+	 *
+	 * @param open opening status of the tap
+	 */
 	public void setOpen(boolean open){
 	}
 	

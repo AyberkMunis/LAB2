@@ -38,7 +38,8 @@ public class TestExample {
 		t.connect(sinkB,1);
 		
 		assertSame("Output of src should be r",r,src.getOutput());
-		
+		assertArrayEquals("Outputs of t should be sink A and sink B",new Element[] {sinkA,sinkB},t.getOutputs());
+
 		// 3) simulation parameters are then defined
 		src.setFlow(20);
 		r.setOpen(true);

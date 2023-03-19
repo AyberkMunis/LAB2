@@ -11,7 +11,7 @@ public class Split extends Element {
 
 	/**
 	 * Constructor
-	 * @param name
+	 * @param name name of the split element
 	 */
 	public Split(String name) {
 	}

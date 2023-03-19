@@ -24,7 +24,7 @@ public class PrintingObserver implements SimulationObserver {
 			countNotifications++;
 			break;
 		case Error:
-			System.err.println(type + " " + name + " inFlow is " + inFlow + " but maximum flow is " + flows);
+			System.err.println(type + " " + name + " inFlow is " + inFlow + " but maximum flow is " + flows[0]);
 			countErrorNotifications++;
 			break;
 		}
@@ -41,7 +41,7 @@ public class PrintingObserver implements SimulationObserver {
 	/**
 	 * method to check whether a flow is defined, (i.e. it is not a {@link #NO_FLOW}).
 	 * 
-	 * @param flow the flow to be tested
+	 * @param flows the flow to be tested
 	 * 
 	 * @return {@code true} if the flow is defined
 	 */
