@@ -13,6 +13,7 @@ public class HSystem {
 	 * @param elem the new element to be added to the system
 	 */
 	public void addElement(Element elem){
+		//TODO: to be implemented
 	}
 	
 	/**
@@ -21,6 +22,7 @@ public class HSystem {
 	 * 							the number of added elements
 	 */
 	public Element[] getElements(){
+		//TODO: to be implemented
 		return null;
 	}
 
@@ -29,6 +31,7 @@ public class HSystem {
 	 * starts the simulation of the system
 	 */
 	public void simulate(SimulationObserver observer){
+		//TODO: to be implemented
 	}
 
 // R6
@@ -36,6 +39,7 @@ public class HSystem {
 	 * Prints the layout of the system starting at each Source
 	 */
 	public String layout(){
+		//TODO: to be implemented
 		return null;
 	}
 
@@ -44,6 +48,7 @@ public class HSystem {
 	 * Deletes a previously added element with the given name from the system
 	 */
 	public boolean deleteElement(String name) {
+		//TODO: to be implemented
 		return false;
 	}
 
@@ -53,5 +58,6 @@ public class HSystem {
 	 * checks also the elements maximum flows against the input flow
 	 */
 	public void simulate(SimulationObserver observer, boolean enableMaxFlowCheck) {
+		//TODO: to be implemented
 	}
 }
