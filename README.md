@@ -11,7 +11,7 @@ All the classes must belong to the package `hydraulic`.
 
 A hydraulic system is composed of elements (of different types) connected to each other (through pipes that are not explicitly modeled in the system).
 
-A system is represented by an object of class `HSystem` that allows adding new elements through the method `addElement()` that accepts as argument an object of class `Element`` and adds it to the system components.
+A system is represented by an object of class `HSystem` that allows adding new elements through the method `addElement()` that accepts as argument an object of class `Element` and adds it to the system components.
 
 By means of method `getElements()` it is possible to get an array containing all and only the elements that compose the system.
 
@@ -51,7 +51,7 @@ The `simulate()` method of class `HSystem`, performs the flow computations for e
 
 When, during simulation, the input and output flows are known for a given element then method `notifyFlow()` of the observer object must be called passing the element type (the name of the class, e.g. `"Source"`), the name, the input flow, and the output flows; if any of the flows is not defined (e.g. for the input for `Source` and output for `Sink`), the constant `NO_FLOW` defined in the interface can be used.
 
-- :point_right: given an object, to find out if it is an instance of a specific class the operator `instanceof` can be used.
+- 👉 given an object, to find out if it is an instance of a specific class the operator `instanceof` can be used.
 E.g. `if( element instanceof Source )` checks if reference `element` points to an object of class `Source`.
 - :warning: Warning: you are **not** required to implement the interface `SimulationObserver`, you only need to use it in the simulation code; a sample implementation that simply prints to the console the notifications, is given in class `PrintingObserver`.
 
@@ -66,12 +66,12 @@ E.g. `if( element instanceof Source )` checks if reference `element` points to a
 
 Class `Multisplit` represents an extension of class `Split` that allows multiple outputs. The constructor accepts, in addition to the name, the number of outputs.
 
-The method `connect()` accepts two arguments: the element to be connected and the output number to connect it to. Outputs are numbered starting from 0.
+The method `connect()` accepts two arguments: the element to be connected, and the output number to connect it to. Outputs are numbered starting from 0.
 
-To find out which elements are connected to the outputs of a multi-split, method `getOutputs()` can be used; it returns an array of the connected elements. If no elements is connected to an output, the corresponding item in the array is set to `null``.
+To find out which elements are connected to the outputs of a multi-split, method `getOutputs()` can be used; it returns an array of the connected elements. If no elements is connected to an output, the corresponding item in the array is set to `null`.
 In preparation for the simulation method `setProportions()` can be used; it accepts a series of `double` values that define the proportion according to which the input flow is divided among the outputs.
 
-Assume that the number of proportions passed to the method is equal to the number of outputs and that their sum is `1.0`.
+- 👉 Assume that the number of proportions passed to the method is equal to the number of outputs and that their sum is `1.0`.
 
 
 ## R6. Visualization
@@ -87,7 +87,7 @@ For instance, a system composed of a `Source`, connected to a `Tap`, that is con
                                   | 
                                   +-> [sink B]Sink
 ```
-Remember that the system might be incomplete, i.e., some elements' outputs might not be connected to any element.
+- 👉 Remember that the system might be incomplete, i.e., some elements' outputs might not be connected to any element.
 
 
 ## R7. Element removal
@@ -117,4 +117,4 @@ Whenever an element's input flow is greater than its maximum allowed flow, the s
 
 ---
 
-Version 1.0 - 2023-03-19
+Version 1.0.1 - 2023-03-29

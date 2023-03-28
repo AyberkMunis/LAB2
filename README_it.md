@@ -51,7 +51,7 @@ Il metodo `simulate()` della classe `HSystem`, effettua i calcoli di portata a p
 
 Quando, durante la simulazione, risultano noti i flussi in entrata e in uscita per un elemento, deve essere invocato il metodo `notifyFlow()` dell'*observer* passando il tipo di elemento (nome della classe), il nome dell'elemento, e i flussi in ingresso e uscita; se un flusso non è definito (ad es. per ingresso per `Source` e uscita per `Sink`) si usa la costante `NO_FLOW` definita nell'interfaccia.
 
-- : point_right: Suggerimento: dato un oggetto, per sapere se è un'istanza di una classe si può usare l'operatore instanceof. 
+- 👉 Suggerimento: dato un oggetto, per sapere se è un'istanza di una classe si può usare l'operatore instanceof. 
 	Es. `if(element instanceof Source)` verifica se `element` è di classe `Source`
 
 - :warning: Attenzione: non è richiesto implementare l'interfaccia `SimulationObserver` ma solamente usarla; 
@@ -68,7 +68,7 @@ Per sapere quali elementi sono connessi in uscita a un multisplit, è possibile 
 
 In preparazione alla simulazione è possibile utilizzare il metodo `setProportions()` che accetta una serie di `double` che definiscono la proporzione con cui ripartire il flusso in ingresso sulle uscite.
 
-- :point_right: Si assuma che il numero di proporzioni passate al metodo sia pari al numero di uscite e che la loro somma sia pari a `1.0`.
+- 👉 Si assuma che il numero di proporzioni passate al metodo sia pari al numero di uscite e che la loro somma sia pari a `1.0`.
 
 
 
@@ -86,7 +86,7 @@ Per esempio, un sistema composto da una `Source` connessa a un `Tap`, che è con
                                   +-> [sink B]Sink 
 ```
 
-Si tenga presente che il sistema potrebbe non essere completo, ovvero alcune uscite di elementi potrebbero non essere connesse ad alcun elemento.
+- 👉 Si tenga presente che il sistema potrebbe non essere completo, ovvero alcune uscite di elementi potrebbero non essere connesse ad alcun elemento.
 
 
 
