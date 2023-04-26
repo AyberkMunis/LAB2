@@ -100,7 +100,7 @@ public class TestExample {
 		t.setMaxFlow(10);
 		sinkA.setMaxFlow(10);
 		sinkB.setMaxFlow(15);
-		sinkC.setMaxFlow(3); // should raise error message, inFlow 8.0 but maxFlow 5.0
+		sinkC.setMaxFlow(3); // should raise error message, inFlow 8.0 but maxFlow 3.0
 		sinkD.setMaxFlow(8);
 		obs = new PrintingObserver();
 		s.simulate(obs,true);
