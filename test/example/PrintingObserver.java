@@ -50,7 +50,7 @@ public class PrintingObserver implements SimulationObserver {
 	static boolean exists(double... flows) {
 		boolean res=true;
 		for(double f : flows) {
-			res &= ! Double.isNaN(f);
+			res &= f != SimulationObserver.NO_FLOW;
 		}
 		return res;
 	}
