@@ -99,4 +99,29 @@ public class TestExampleExt {
 		assertEquals("Missing some simulation notification", 8, obs.getCount());
 		assertEquals("Error notification not received", 1, obs.getErrorCount());
 	}
+
+	@Test
+	public void testR9(){
+		double flow = 100.0;
+		double[] props = {0.25,0.35,0.40};
+
+		HSystem s = HSystem.build().
+		addSource("Src").withFlow(flow).
+		linkToMultisplit("MS",3).withPropotions(props).withOutputs().
+			linkToSplit("T").withOutputs().
+				linkToSink("S1").
+				then().linkToSink("S2").
+				done().
+			then().linkToSink("S3").
+			then().linkToSink("S4").
+		complete();
+
+		assertNotNull("Builder did not return any system", s);
+
+		PrintingObserver obs = new PrintingObserver();
+		s.simulate(obs);
+		assertTrue("Expected at least 7 notifications but received just " + obs.getCount(), 
+				   obs.getCount() >= 7);
+	}
+
 }

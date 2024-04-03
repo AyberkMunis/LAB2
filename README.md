@@ -15,6 +15,8 @@ A system is represented by an object of class `HSystem` that allows adding new e
 
 By means of method `getElements()` it is possible to get an array containing all and only the elements that compose the system.
 
+- 👉 You can safely assume that the maximum number of elements in a system is `100`.
+
 
 ## R2. Simple elements
 
@@ -53,7 +55,7 @@ When, during simulation, the input and output flows are known for a given elemen
 
 - 👉 given an object, to find out if it is an instance of a specific class the operator `instanceof` can be used.
 E.g. `if( element instanceof Source )` checks if reference `element` points to an object of class `Source`.
-- :warning: Warning: you are **not** required to implement the interface `SimulationObserver`, you only need to use it in the simulation code; a sample implementation that simply prints to the console the notifications, is given in class `PrintingObserver`.
+- **Warning**: you are **not** required to implement the interface `SimulationObserver`, you only need to use it in the simulation code; a sample implementation that simply prints to the console the notifications, is given in class `PrintingObserver`.
 
 
 ---
@@ -115,6 +117,70 @@ The `HSystem` class contains an overload of method `simulate()`, that accepts an
 The method accepts as first argument and object implementing the `SimulationObserver` interface. 
 Whenever an element's input flow is greater than its maximum allowed flow, the simulation calls the method `notifyFlowError()` of the observer to notify an error. The notification method accepts as arguments the element type (class name), the name, the input flow, and the maximum flow rate.
 
+## R9. Fluent builder
+
+The class `HBuilder` implements a builder that using method chaining provides a [Fluent API](https://www.martinfowler.com/bliki/FluentInterface.html).
+
+The builder can be created using the method `build()` in class `HSystem`.
+
+As far as the system layout is concerned the following methods can be used:
+
+- a new source can be added with method `addSource()` accepting the name of the source.
+
+- a new tap can be linked to the previous element with `linkToTap()` that accepts the name of the element.
+
+- a new sink can be linked to the previous element with `linkToSink()` that accepts the name of the element.
+
+- a new split can be linked to the previous element with `linkToSplit()` that accepts the name of the element.
+
+- a new multisplit can be linked to the previous element with `linkToMultisplit()` that accepts the name of the element and the number of outputs.
+
+- when a split or multisplit is linked, the different outputs can be specified calling the method `withOutputs()` that introduces all the outputs:
+    - the outputs can be defined using the `linkTo..` methods
+
+- to specify the next output to a (multi)split the method `then()` must be used
+
+- to indicate that all outputs for a (multi)split have been defined the method `done()` can be used
+
+- eventually method `complete()` can be used to get the system object.
+
+### Example
+
+The following code:
+
+```
+HSystem s = HSystem.build().
+        addSource("Src")
+        linkToMultisplit("MS",3).withOutputs().
+            linkToSplit("T").withOutputs().
+                linkToSink("S1").
+                then().linkToSink("S2").
+                done().
+            then().linkToSink("S3").
+            then().linkToSink("S4").
+        complete();
+```
+
+produces the following system:
+
+```
+[Src]Source -> [MS]Split +-> [T]Split +-> [S1]Sink
+                         |            |
+                         |            +-> [S2]Sink
+                         |
+                         +-> [S3]Sink
+                         |
+                         +-> [S4]Sink
+```
+
+As far as the simulation parameters, the following method can be used right after the corresponding element has been defined:
+
+- `open()` and `closed()` to define the status of a tap,
+- `withFlow()` to define the flow of a source,
+- `withProportions()` to define the proportions of a multisplit.
+
+Concerning the maximum flow, the method `maxFlow()` can be used after an element to define the maximum allowed flow.
+
 ---
 
-Version 1.0.1 - 2023-03-29
+Version 1.1.0 - 2024-03-18

@@ -17,6 +17,8 @@ Tramite il metodo `getElements()` è possibile ottenere un array contenente tutt
 
 Tutti gli elementi hanno un nome che può essere letto tramite il metodo `getName()`.
 
+- 👉 Suggerimento: si assuma che il numero massimo di elementi di un sistema idraulico sia 100. 
+
 
 ## R2: Elementi semplici
 
@@ -51,11 +53,10 @@ Il metodo `simulate()` della classe `HSystem`, effettua i calcoli di portata a p
 
 Quando, durante la simulazione, risultano noti i flussi in entrata e in uscita per un elemento, deve essere invocato il metodo `notifyFlow()` dell'*observer* passando il tipo di elemento (nome della classe), il nome dell'elemento, e i flussi in ingresso e uscita; se un flusso non è definito (ad es. per ingresso per `Source` e uscita per `Sink`) si usa la costante `NO_FLOW` definita nell'interfaccia.
 
-- 👉 Suggerimento: dato un oggetto, per sapere se è un'istanza di una classe si può usare l'operatore instanceof. 
+- 👉 Suggerimento: dato un oggetto, per sapere se è un'istanza di una classe si può usare l'operatore `instanceof`. 
 	Es. `if(element instanceof Source)` verifica se `element` è di classe `Source`
 
-- :warning: Attenzione: non è richiesto implementare l'interfaccia `SimulationObserver` ma solamente usarla; 
-	per scopi di verifica viene fornito un esempio di implementazione (classe `PrintingObserver`) che semplicemente stampa su console le notifiche.
+- **Attenzione**: non è richiesto di implementare l'interfaccia `SimulationObserver` ma solamente usarla; per scopi di verifica viene fornito un esempio di implementazione (la classe `PrintingObserver`) che semplicemente stampa su console le notifiche.
 
 
 ## R5. Multi-split
@@ -89,7 +90,6 @@ Per esempio, un sistema composto da una `Source` connessa a un `Tap`, che è con
 - 👉 Si tenga presente che il sistema potrebbe non essere completo, ovvero alcune uscite di elementi potrebbero non essere connesse ad alcun elemento.
 
 
-
 ## R7. Eliminazione elementi
 
 Il metodo `deleteElement()` della classe `HSystem` permette di eliminare un elemento precedentemente aggiunto al sistema; il metodo accetta come parametro il nome dell'elemento da eliminare.
@@ -113,6 +113,72 @@ La classe Element offre il metodo `setMaxFlow()`, che accetta come parametro un 
 
 La classe `HSystem` contiene un overload del metodo `simulate()` che accetta come parametro il valore booleano `enableMaxFlowCheck`: se quest'ultimo è settato a vero, occorre effettuare i controlli sulla portata massima. Il metodo accetta come primo parametro un oggetto che implementa l'interfaccia `SimulationObserver`; quando l'input flow di un elemento è maggiore del suo flusso massimo consentito, occorre notificare l'errore invocando il metodo `notifyFlowError()` dell'osservatore, passando il tipo di elemento (nome della classe), il nome dell'elemento, il flusso in ingresso e la sua portata massima.
 
+
+## R9. Fluent builder
+
+La classe `HBuilder` implementa un *builder* che usa la concatenazione di metodi per fornire una [Fluent API](https://www.martinfowler.com/bliki/FluentInterface.html).
+
+Il *builder* è creato con il metodo `build()` nella classe `HSystem`.
+
+Per quanto riguarda la struttura del systema, i seguenti metodi sono disponibili:
+
+
+- una nuova sorgente è aggiunta con il metodo `addSource()` che accetta il nome della stessa.
+
+- un nuovo rubinetto è aggiunto e collegato all'elemento precedente con il metodo  `linkToTap()` che ne accetta il nome.
+
+- un nuovo scarico è aggiunto e collegato all'elemento precedente con il metodo  `linkToSink()` che ne accetta il nome.
+
+- un nuovo split è aggiunto e collegato all'elemento precedente con il metodo  `linkToSplit()` che ne accetta il nome.
+
+- un nuovo multi split è aggiunto e collegato all'elemento precedente con il metodo `linkToMultisplit()` che ne accetta il nome ed il numero di uscite.
+
+- quando uno split o un multisplit viene creato, le differenti uscite possono essere specificate con il metodo `withOutputs()` che introduce tutti gli elementi in uscita:
+    - gli elementi collgati alle uscite sono definiti con i metodi `linkTo..` descritti sopra
+
+- per indicare l'elemento per la prossima uscita di un (multi)split is usa il metodo `then()`
+
+- per indicare che tutte le uscite di un (multi)split sono state collegate si usa il metodo `done()`
+
+- alla fine il metodo `complete()` può essere usato per ottenere l'oggetto `HSystem` costruito.
+
+### Esempio
+
+Il codice seguente:
+
+```
+HSystem s = HSystem.build().
+        addSource("Src")
+        linkToMultisplit("MS",3).withOutputs().
+            linkToSplit("T").withOutputs().
+                linkToSink("S1").
+                then().linkToSink("S2").
+                done().
+            then().linkToSink("S3").
+            then().linkToSink("S4").
+        complete();
+```
+
+produce il seguente sistema:
+
+```
+[Src]Source -> [MS]Split +-> [T]Split +-> [S1]Sink
+                         |            |
+                         |            +-> [S2]Sink
+                         |
+                         +-> [S3]Sink
+                         |
+                         +-> [S4]Sink
+```
+
+Per quanto riguarda i parametri di simulazione, si possono utilizzare i seguenti metodi subito dopo aver definito gli elementi corrispondenti:
+
+- `open()` e `closed()` per definire l'apertura di un rubinetto,
+- `withFlow()` per definire il flusso di una sorgente,
+- `withProportions()` per definire le proporzioni di ripartizione di uno split.
+
+Infine, per il controllo dei flussi massimi, il metodo `maxFlow()` può essere usato dopo un elemento per definire il flusso massimo consentito.
+
 ---
 
-Versione 1.0 - 2023-03-19
+Versione 1.1.0 - 2024-03-18

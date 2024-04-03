@@ -60,4 +60,13 @@ public class HSystem {
 	public void simulate(SimulationObserver observer, boolean enableMaxFlowCheck) {
 		//TODO: to be implemented
 	}
+
+// R9
+	/**
+	 * creates a new builder that can be used to create a 
+	 * hydraulic system through a fluent API 
+	 */
+    public static HBuilder build() {
+		return new HBuilder();
+    }
 }
