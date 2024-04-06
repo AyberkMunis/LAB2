@@ -1,5 +1,8 @@
 package hydraulic;
 
+/**
+ * Hydraulics system builder providing a fluent API
+ */
 public class HBuilder {
 
     /**
@@ -14,7 +17,7 @@ public class HBuilder {
     }
 
     /**
-     * returns the hydraulic system built so far
+     * returns the hydraulic system built with the previous operations
      * 
      * @return the hydraulic system
      */
@@ -56,7 +59,8 @@ public class HBuilder {
 
     /**
      * creates a multisplit and links it to the previous element
-     * @param name of the multisplit
+     * @param name name of the multisplit
+     * @param numOutput the number of output of the multisplit
      * @return the builder itself for chaining 
      */
     public HBuilder linkToMultisplit(String name, int numOutput) {

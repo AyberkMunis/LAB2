@@ -7,9 +7,9 @@ import java.util.Arrays;
 /**
  * Sample implementation of {@link SimulationObserver}.
  * This simulation observer simply prints out the notification info
- * and keeps count of how many notification it receive.
+ * and keeps count of how many notification it received.
  * 
- * This class can be used for debugging purposes.
+ * This class can be used for debugging and testing purposes.
  *  
  */
 public class PrintingObserver implements SimulationObserver {
@@ -32,10 +32,20 @@ public class PrintingObserver implements SimulationObserver {
 		}
 	}	
 	
+	/**
+	 * retrieves the number of status notifications received
+	 * 
+	 * @return the notification count
+	 */
 	public int getCount() {
 		return countNotifications;
 	}
 
+	/**
+	 * retrieves the number of error notifications received
+	 * 
+	 * @return the cound of error notifications
+	 */
 	public int getErrorCount() {
 		return countErrorNotifications;
 	}

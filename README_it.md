@@ -17,7 +17,9 @@ Tramite il metodo `getElements()` è possibile ottenere un array contenente tutt
 
 Tutti gli elementi hanno un nome che può essere letto tramite il metodo `getName()`.
 
-- 👉 Suggerimento: si assuma che il numero massimo di elementi di un sistema idraulico sia 100. 
+Suggerimenti:
+
+- 👉 si assuma che il numero massimo di elementi di un sistema idraulico sia 100. 
 
 
 ## R2: Elementi semplici
@@ -53,6 +55,8 @@ Il metodo `simulate()` della classe `HSystem`, effettua i calcoli di portata a p
 
 Quando, durante la simulazione, risultano noti i flussi in entrata e in uscita per un elemento, deve essere invocato il metodo `notifyFlow()` dell'*observer* passando il tipo di elemento (nome della classe), il nome dell'elemento, e i flussi in ingresso e uscita; se un flusso non è definito (ad es. per ingresso per `Source` e uscita per `Sink`) si usa la costante `NO_FLOW` definita nell'interfaccia.
 
+Suggerimenti:
+
 - 👉 Suggerimento: dato un oggetto, per sapere se è un'istanza di una classe si può usare l'operatore `instanceof`. 
 	Es. `if(element instanceof Source)` verifica se `element` è di classe `Source`
 
@@ -68,6 +72,8 @@ Il metodo `connect()` riceve due parametri: l'elemento da collegare ed il numero
 Per sapere quali elementi sono connessi in uscita a un multisplit, è possibile utilizzare il metodo `getOutputs()` che restituisce un array con gli elementi connessi. Se nessun elemento è connesso ad una certa uscita, la cella corrispondente dell'array è `null`.
 
 In preparazione alla simulazione è possibile utilizzare il metodo `setProportions()` che accetta una serie di `double` che definiscono la proporzione con cui ripartire il flusso in ingresso sulle uscite.
+
+Suggerimenti:
 
 - 👉 Si assuma che il numero di proporzioni passate al metodo sia pari al numero di uscite e che la loro somma sia pari a `1.0`.
 
@@ -86,6 +92,8 @@ Per esempio, un sistema composto da una `Source` connessa a un `Tap`, che è con
                                   |
                                   +-> [sink B]Sink 
 ```
+
+Suggerimenti:
 
 - 👉 Si tenga presente che il sistema potrebbe non essere completo, ovvero alcune uscite di elementi potrebbero non essere connesse ad alcun elemento.
 

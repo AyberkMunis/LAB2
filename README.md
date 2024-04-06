@@ -15,6 +15,8 @@ A system is represented by an object of class `HSystem` that allows adding new e
 
 By means of method `getElements()` it is possible to get an array containing all and only the elements that compose the system.
 
+Hints:
+
 - 👉 You can safely assume that the maximum number of elements in a system is `100`.
 
 
@@ -53,6 +55,8 @@ The `simulate()` method of class `HSystem`, performs the flow computations for e
 
 When, during simulation, the input and output flows are known for a given element then method `notifyFlow()` of the observer object must be called passing the element type (the name of the class, e.g. `"Source"`), the name, the input flow, and the output flows; if any of the flows is not defined (e.g. for the input for `Source` and output for `Sink`), the constant `NO_FLOW` defined in the interface can be used.
 
+Hints:
+
 - 👉 given an object, to find out if it is an instance of a specific class the operator `instanceof` can be used.
 E.g. `if( element instanceof Source )` checks if reference `element` points to an object of class `Source`.
 - **Warning**: you are **not** required to implement the interface `SimulationObserver`, you only need to use it in the simulation code; a sample implementation that simply prints to the console the notifications, is given in class `PrintingObserver`.
@@ -73,6 +77,8 @@ The method `connect()` accepts two arguments: the element to be connected, and t
 To find out which elements are connected to the outputs of a multi-split, method `getOutputs()` can be used; it returns an array of the connected elements. If no elements is connected to an output, the corresponding item in the array is set to `null`.
 In preparation for the simulation method `setProportions()` can be used; it accepts a series of `double` values that define the proportion according to which the input flow is divided among the outputs.
 
+Hints:
+
 - 👉 Assume that the number of proportions passed to the method is equal to the number of outputs and that their sum is `1.0`.
 
 
@@ -89,6 +95,9 @@ For instance, a system composed of a `Source`, connected to a `Tap`, that is con
                                   | 
                                   +-> [sink B]Sink
 ```
+
+Hints:
+
 - 👉 Remember that the system might be incomplete, i.e., some elements' outputs might not be connected to any element.
 
 
@@ -107,7 +116,6 @@ Taking the example from [R6](#r6-visualization), the layout after deleting the `
                         |
                         +-> [sink B]Sink
 ```
-
 
 ## R8. Maximum flow rate and related alarms
 
@@ -183,4 +191,4 @@ Concerning the maximum flow, the method `maxFlow()` can be used after an element
 
 ---
 
-Version 1.1.0 - 2024-03-18
+Version 1.1.1 - 2024-04-06

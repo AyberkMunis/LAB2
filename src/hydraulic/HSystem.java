@@ -10,6 +10,7 @@ public class HSystem {
 // R1
 	/**
 	 * Adds a new element to the system
+	 * 
 	 * @param elem the new element to be added to the system
 	 */
 	public void addElement(Element elem){
@@ -18,6 +19,7 @@ public class HSystem {
 	
 	/**
 	 * returns the element added so far to the system
+	 * 
 	 * @return an array of elements whose length is equal to 
 	 * 							the number of added elements
 	 */
@@ -29,6 +31,14 @@ public class HSystem {
 // R4
 	/**
 	 * starts the simulation of the system
+	 * 
+	 * The notification about the simulations are sent
+	 * to an observer object
+	 * 
+	 * Before starting simulation the parameters of the
+	 * elements of the system must be defined
+	 * 
+	 * @param observer the observer receiving notifications
 	 */
 	public void simulate(SimulationObserver observer){
 		//TODO: to be implemented
@@ -45,7 +55,8 @@ public class HSystem {
 
 // R7
 	/**
-	 * Deletes a previously added element with the given name from the system
+	 * Deletes a previously added element 
+	 * with the given name from the system
 	 */
 	public boolean deleteElement(String name) {
 		//TODO: to be implemented
@@ -56,6 +67,12 @@ public class HSystem {
 	/**
 	 * starts the simulation of the system; if {@code enableMaxFlowCheck} is {@code true},
 	 * checks also the elements maximum flows against the input flow
+	 * 
+	 * If {@code enableMaxFlowCheck} is {@code false}  a normals simulation as
+	 * the method {@link #simulate(SimulationObserver)} is performed
+	 * 
+	 * Before performing a checked simulation the max flows of the elements in thes
+	 * system must be defined.
 	 */
 	public void simulate(SimulationObserver observer, boolean enableMaxFlowCheck) {
 		//TODO: to be implemented
@@ -65,6 +82,8 @@ public class HSystem {
 	/**
 	 * creates a new builder that can be used to create a 
 	 * hydraulic system through a fluent API 
+	 * 
+	 * @return the builder object
 	 */
     public static HBuilder build() {
 		return new HBuilder();
