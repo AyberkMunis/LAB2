@@ -21,6 +21,7 @@ public class Source extends Element {
 	 * @param flow flow of the source (in cubic meters per hour)
 	 */
 	public void setFlow(double flow){
+		// TODO: to be implemented
 	}
 
 }

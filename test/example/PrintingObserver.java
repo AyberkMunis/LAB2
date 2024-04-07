@@ -19,13 +19,13 @@ public class PrintingObserver implements SimulationObserver {
 	@Override
 	public void notify(Level level, String type, String name, double inFlow, double... flows) {
 		switch(level) {
-		case Status:
+		case STATUS:
 			System.out.println(type + " " + name + ": ");
 			if(exists(inFlow)) System.out.println("\t-> in flow=" + inFlow);
 			if(exists(flows)) System.out.println("\t<- out flow=" + Arrays.toString(flows));
 			countNotifications++;
 			break;
-		case Error:
+		case ERROR:
 			System.err.println(type + " " + name + " inFlow is " + inFlow + " but maximum flow is " + flows[0]);
 			countErrorNotifications++;
 			break;

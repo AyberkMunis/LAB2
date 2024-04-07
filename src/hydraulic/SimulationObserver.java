@@ -14,7 +14,7 @@ public interface SimulationObserver {
 	 * Constant used to mark a flow as missing,
 	 * (e.g. for the classes {@link Source} and {@link Sink})
 	 */
-	final static double NO_FLOW = Double.NaN;
+	static final double NO_FLOW = Double.NaN;
 	
 	/**
 	 * Notification levels
@@ -24,11 +24,11 @@ public interface SimulationObserver {
 		/**
 		 * show the information about the status of an element during the simulation
 		 */
-		Status, 
+		STATUS, 
 		/**
 		 * notify an error detected on an element during the simulation
 		 */
-		Error };
+		ERROR }
 	
 	/**
 	 * General purpose notification method to collect information and errors
@@ -55,7 +55,7 @@ public interface SimulationObserver {
 	 * @param outFlow output flow for the element
 	 */
 	default void notifyFlow(String type, String name, double inFlow, double... outFlow) {
-		notify(Level.Status,type,name,inFlow,outFlow);
+		notify(Level.STATUS,type,name,inFlow,outFlow);
 	}
 
 	/**
@@ -72,7 +72,7 @@ public interface SimulationObserver {
 	 * @param maxFlow the maximum flow for the element
 	 */
 	default void notifyFlowError(String type, String name, double inFlow, double maxFlow) {
-		notify(Level.Error,type,name,inFlow,maxFlow);
+		notify(Level.ERROR,type,name,inFlow,maxFlow);
 	}
 
 }

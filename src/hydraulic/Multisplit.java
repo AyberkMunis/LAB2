@@ -28,6 +28,7 @@ public class Multisplit extends Split {
 	 * @param proportions the proportions of flow for each output
 	 */
 	public void setProportions(double... proportions) {
+		// TODO: to be implemented
 	}
 	
 }
