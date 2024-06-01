@@ -40,7 +40,7 @@ public interface SimulationObserver {
 	 * @param inFlow 	input flow for the element
 	 * @param flows 	additional information, depending on the kind of notification 
 	 */
-	public void notify(Level level, String type, String name, double inFlow, double... flows);
+	public void notify(Level level,String type, String name, double inFlow, double... flows);
 
 	/**
 	 * Simulation element info notification method.

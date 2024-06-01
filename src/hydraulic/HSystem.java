@@ -1,11 +1,22 @@
 package hydraulic;
 
+import java.util.ArrayList;
+
+import hydraulic.SimulationObserver.Level;
+import hydrolics.src.hydraulic.Element;
+
+
+
 /**
  * Main class that acts as a container of the elements for
  * the simulation of an hydraulics system 
  * 
  */
 public class HSystem {
+
+	private Element list[]=new Element[1];
+	private int elemno=0;
+
 
 // R1
 	/**
@@ -14,7 +25,13 @@ public class HSystem {
 	 * @param elem the new element to be added to the system
 	 */
 	public void addElement(Element elem){
-		//TODO: to be implemented
+		elemno+=1;
+		Element[] list2=this.list;
+		this.list=new Element[elemno];
+		for(int i=0;i<list2.length;i++){
+			this.list[i]=list2[i];
+		}
+		this.list[elemno-1]=elem;
 	}
 	
 	/**
@@ -24,8 +41,7 @@ public class HSystem {
 	 * 							the number of added elements
 	 */
 	public Element[] getElements(){
-		//TODO: to be implemented
-		return null;
+		return list;
 	}
 
 // R4
@@ -41,7 +57,10 @@ public class HSystem {
 	 * @param observer the observer receiving notifications
 	 */
 	public void simulate(SimulationObserver observer){
-		//TODO: to be implemented
+		for(int i=0;i<list.length;i++){
+			Level level=Level.STATUS;
+			observer.notify(level,list[i].getClass().getSimpleName(),list[i].getName(),list[i].notifyFlow(),list[i].notifyFlow());
+		}
 	}
 
 // R6

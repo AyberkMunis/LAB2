@@ -1,6 +1,11 @@
 package example;
-import hydraulic.*;
-
+import hydrolics.*;
+import hydrolics.src.hydraulic.Element;
+import hydraulic.HSystem;
+import hydraulic.Sink;
+import hydraulic.Source;
+import hydraulic.Tap;
+import hydraulic.Split;
 import static org.junit.Assert.*;
 import org.junit.Test;
 
@@ -10,10 +15,11 @@ public class TestExampleBase {
 	public void testR1(){
 
 		// R1
-		HSystem s = new HSystem();
+		hydraulic.HSystem s = new hydraulic.HSystem();
 		
 		Element[] elements = s.getElements();
-		assertNotNull("Apparently getElements() is not implemented yet", elements);
+
+		assertNotNull("Apparently getElements() is not implemented yet" + elements, elements);
 		assertEquals("Initially no elements are present in the system", 0, elements.length);
 		
 	}	

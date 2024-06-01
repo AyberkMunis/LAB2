@@ -1,5 +1,7 @@
 package hydraulic;
 
+import hydrolics.src.hydraulic.Element;
+
 /**
  * Represents a source of water, i.e. the initial element for the simulation.
  *
@@ -12,7 +14,9 @@ public class Source extends Element {
 	 * constructor
 	 * @param name name of the source element
 	 */
+	private double flow;
 	public Source(String name) {
+		super(name);
 	}
 
 	/**
@@ -21,7 +25,10 @@ public class Source extends Element {
 	 * @param flow flow of the source (in cubic meters per hour)
 	 */
 	public void setFlow(double flow){
-		// TODO: to be implemented
+		this.flow=flow;
+	}
+	public double notifyFlow(){
+		return this.flow;
 	}
 
 }
